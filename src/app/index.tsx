@@ -1,12 +1,15 @@
-import React from 'react';
-import './styles.scss';
+import { Navbar } from 'components';
+import React, { FC } from 'react';
+import 'styles/main.scss';
 
-function App() {
+const App: FC = () => {
   return (
     <div className='App'>
-      <header className='App-header'>Hello World!</header>
+      <header className='App-header'>
+        <Navbar />
+      </header>
     </div>
   );
-}
+};
 
 export default App;

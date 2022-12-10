@@ -1,0 +1,72 @@
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: $space-md;
+  margin-right: $space-md;
+  background-color: $color-gray-primary;
+
+  @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+    margin-left: $space-sm;
+    margin-right: $space-sm;
+    height: 58px;
+  }
+
+  .Navbar-brand {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: white;
+
+    @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+      font-size: 18px;
+      line-height: 22px;
+    }
+  }
+
+  .Navbar-nav {
+    display: flex;
+    align-items: center;
+    column-gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+      padding: 0 2px;
+    }
+
+    .Nav-item {
+      .Nav-item__link {
+        color: white;
+
+        &:active {
+          color: black;
+        }
+      }
+
+      .Nav-text {
+        display: block;
+
+        @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+          display: none;
+        }
+      }
+
+      .Nav-icon {
+        display: none;
+
+        @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+  }
+}
