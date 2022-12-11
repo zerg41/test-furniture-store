@@ -5,13 +5,13 @@
   height: 100%;
   width: 100%;
   max-width: 1200px;
-  margin-left: $space-md;
-  margin-right: $space-md;
+  margin-left: $space-24;
+  margin-right: $space-24;
   background-color: $color-gray-primary;
 
   @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
-    margin-left: $space-sm;
-    margin-right: $space-sm;
+    margin-left: $space-12;
+    margin-right: $space-12;
     height: 58px;
   }
 
@@ -68,5 +68,46 @@
         }
       }
     }
+  }
+}
+
+.Toolbar {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  max-width: $MAX_WIDTH;
+  margin-bottom: 36px;
+}
+
+.Filter {
+  position: relative;
+
+  .Filter__select {
+    box-sizing: border-box;
+    width: 288px;
+    padding: 10px 14px;
+    border: 1px solid $color-gray-border;
+    border-radius: 20px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: black;
+    appearance: none;
+    cursor: pointer;
+  }
+
+  &::after {
+    content: url('../assets/icons/arrow-down-icon.svg');
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
   }
 }

@@ -1,5 +1,6 @@
-import { Navbar } from 'components';
 import React, { FC } from 'react';
+import { Navbar } from 'components';
+import { Catalog } from 'pages';
 import 'styles/main.scss';
 
 const App: FC = () => {
@@ -8,6 +9,9 @@ const App: FC = () => {
       <header className='App-header'>
         <Navbar />
       </header>
+      <main className='App-main'>
+        <Catalog />
+      </main>
     </div>
   );
 };

@@ -36,9 +36,18 @@ a {
   align-items: flex-end;
   width: 100%;
   height: $height-navbar;
+  margin-bottom: $space-32;
 
   @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
     height: 90px;
+    margin-bottom: $space-16;
     background-color: $color-gray-primary;
   }
+}
+
+.App-main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
 }
