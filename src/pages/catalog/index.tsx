@@ -1,4 +1,6 @@
 import React, { FC, useState } from 'react';
+import { mockProducts } from 'mock';
+import { ProductCard } from 'components';
 
 // interface IOrderKeyword {
 //   ASC: 'asc',
@@ -20,8 +22,21 @@ export const Catalog: FC = () => {
     setOrderBy(evt.target.value as OrderByOption);
   }
 
+  function renderProducts() {
+    return mockProducts
+      .slice()
+      .sort((a, b) => (orderBy === 'asc' ? a.price - b.price : b.price - a.price))
+      .map((product) => {
+        return (
+          <li key={product.id} className='Products__list-item'>
+            <ProductCard product={product} />
+          </li>
+        );
+      });
+  }
+
   return (
-    <>
+    <div className='Page-wrapper Catalog'>
       <div className='Toolbar'>
         <div className='Filter'>
           <select className='Filter__select' value={orderBy} onChange={handleFilterSelect}>
@@ -33,8 +48,10 @@ export const Catalog: FC = () => {
             </option>
           </select>
         </div>
-        <section className='Products'></section>
       </div>
-    </>
+      <section className='Products'>
+        <ul className='Products__list'>{renderProducts()}</ul>
+      </section>
+    </div>
   );
 };

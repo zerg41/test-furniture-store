@@ -4,7 +4,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  max-width: 1200px;
+  max-width: $MAX_WIDTH;
   margin-left: $space-24;
   margin-right: $space-24;
   background-color: $color-gray-primary;
@@ -71,12 +71,99 @@
   }
 }
 
+.Page-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: $MAX_WIDTH;
+  margin-left: $space-24;
+  margin-right: $space-24;
+
+  @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+    margin-left: $space-12;
+    margin-right: $space-12;
+  }
+}
+
+.Catalog {
+  flex-direction: column;
+
+  .Products__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-content: center;
+    row-gap: 24px; // TODO: fix scroll
+    column-gap: 32px;
+    grid-template-columns: repeat(auto-fill, minmax(calc($MIN_WIDTH - 2 * $space-12), 378px));
+
+    .Products__list-item {
+      width: 100%;
+      height: 384px;
+    }
+  }
+}
+
+.Product-card {
+  position: relative;
+
+  .Product-card__image {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 250px;
+  }
+
+  .Product-card__title {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .Product-card__description {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #888888;
+  }
+
+  .Product-card__price {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #050505;
+  }
+
+  .Product-card__extra {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    column-gap: 24px;
+
+    .Product-card__extra-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+  }
+}
+
 .Toolbar {
   display: flex;
   justify-content: end;
-  width: 100%;
   max-width: $MAX_WIDTH;
-  margin-bottom: 36px;
+  width: 100%;
+  margin-bottom: 34px;
 }
 
 .Filter {
@@ -85,7 +172,7 @@
   .Filter__select {
     box-sizing: border-box;
     width: 288px;
-    padding: 10px 14px;
+    padding: 8px 14px;
     border: 1px solid $color-gray-border;
     border-radius: 20px;
     font-family: 'Montserrat';
