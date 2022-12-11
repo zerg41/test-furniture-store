@@ -15,7 +15,12 @@ const OrderKeyword = {
   DESC: 'desc',
 } as const;
 
-export const Catalog: FC = () => {
+type CatalogProps = {
+  selectedProducts: number[];
+  onProductSelect: (id: number) => void;
+};
+
+export const Catalog: FC<CatalogProps> = ({ selectedProducts, onProductSelect }) => {
   let [orderBy, setOrderBy] = useState<OrderByOption>(OrderKeyword.ASC);
 
   function handleFilterSelect(evt: React.ChangeEvent<HTMLSelectElement>) {
@@ -27,9 +32,15 @@ export const Catalog: FC = () => {
       .slice()
       .sort((a, b) => (orderBy === 'asc' ? a.price - b.price : b.price - a.price))
       .map((product) => {
+        let isSelected = selectedProducts.includes(product.id);
+
         return (
           <li key={product.id} className='Products__list-item'>
-            <ProductCard product={product} />
+            <ProductCard
+              product={product}
+              isSelected={isSelected}
+              onProductSelect={onProductSelect}
+            />
           </li>
         );
       });

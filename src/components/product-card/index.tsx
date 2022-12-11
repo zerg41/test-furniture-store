@@ -5,10 +5,21 @@ import { IMockProduct } from 'mock';
 
 type ProductCardProps = {
   product: IMockProduct;
+  isSelected: boolean;
+  onProductSelect: (id: number) => void;
   viewType?: 'catalog' | 'cart';
 };
-export const ProductCard: FC<ProductCardProps> = ({ viewType, product }) => {
+export const ProductCard: FC<ProductCardProps> = ({
+  viewType,
+  product,
+  isSelected,
+  onProductSelect,
+}) => {
   let [isExtraShown, setIsExtraShown] = useState(false);
+
+  function handleAddToCart(id: number) {
+    onProductSelect(id);
+  }
 
   return (
     <article
@@ -25,8 +36,11 @@ export const ProductCard: FC<ProductCardProps> = ({ viewType, product }) => {
           <button className='Product-card__extra-button'>
             <AddToFavIcon />
           </button>
-          <button className='Product-card__extra-button'>
-            <AddToCartIcon />
+          <button
+            className='Product-card__extra-button'
+            onClick={() => handleAddToCart(product.id)}
+          >
+            <AddToCartIcon color={isSelected ? 'red' : '#c4c4c4'} />
           </button>
         </div>
       )}
