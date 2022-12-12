@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react';
 import { mockProducts } from 'mock';
-import { OrderForm, ProductCard } from 'components';
+import { Button, CartCard, OrderForm, ProductCard } from 'components';
 
 type CartProps = {
   selectedProducts: number[];
@@ -23,7 +23,12 @@ export const Cart: FC<CartProps> = ({ selectedProducts, onProductSelect }) => {
       .filter((product) => selectedProducts.includes(product.id))
       .map((product) => (
         <li key={product.id} className='Order-details__list-item'>
-          <ProductCard isSelected={true} onProductSelect={onProductSelect} product={product} />
+          <CartCard
+            viewType='cart'
+            isSelected={true}
+            onProductSelect={onProductSelect}
+            product={product}
+          />
         </li>
       ));
   }
@@ -31,12 +36,22 @@ export const Cart: FC<CartProps> = ({ selectedProducts, onProductSelect }) => {
   return (
     <div className='Page-wrapper Cart'>
       <section className='Order-details'>
-        <header className='Order-details__header'>
-          <div>Товар</div>
-          <div>К-во</div>
-        </header>
         {selectedProducts.length ? (
-          <ul className='Order-details__list'>{renderSelectedProduct()}</ul>
+          <>
+            <header className='Order-details__header'>
+              <div>Товар</div>
+              <div>К-во</div>
+            </header>
+            <ul className='Order-details__list'>{renderSelectedProduct()}</ul>
+            <div className='Order-details__button-group'>
+              <Button size='md' variance='outlined'>
+                Очистить корзину
+              </Button>
+              <Button size='md' variance='solid'>
+                Продолжить покупки
+              </Button>
+            </div>
+          </>
         ) : (
           <>Добавьте товары в корзину</>
         )}
