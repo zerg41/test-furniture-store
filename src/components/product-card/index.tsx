@@ -6,7 +6,7 @@ import { IMockProduct } from 'mock';
 type ProductCardProps = {
   product: IMockProduct;
   isSelected: boolean;
-  onProductSelect: (id: number) => void;
+  onProductSelect: (id: number, price: number) => void;
   viewType?: 'catalog' | 'cart';
 };
 export const ProductCard: FC<ProductCardProps> = ({
@@ -17,8 +17,8 @@ export const ProductCard: FC<ProductCardProps> = ({
 }) => {
   let [isExtraShown, setIsExtraShown] = useState(false);
 
-  function handleAddToCart(id: number) {
-    onProductSelect(id);
+  function handleAddToCart(id: number, price: number) {
+    onProductSelect(id, price);
   }
 
   return (
@@ -38,7 +38,7 @@ export const ProductCard: FC<ProductCardProps> = ({
           </button>
           <button
             className='Product-card__extra-button'
-            onClick={() => handleAddToCart(product.id)}
+            onClick={() => handleAddToCart(product.id, product.price)}
           >
             <AddToCartIcon color={isSelected ? 'red' : '#c4c4c4'} />
           </button>

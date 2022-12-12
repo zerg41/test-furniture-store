@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { mockProducts } from 'mock';
 import { ProductCard } from 'components';
+import { ICartItem } from 'app';
 
 // interface IOrderKeyword {
 //   ASC: 'asc',
@@ -16,11 +17,11 @@ const OrderKeyword = {
 } as const;
 
 type CatalogProps = {
-  selectedProducts: number[];
+  cartItems: ICartItem[];
   onProductSelect: (id: number) => void;
 };
 
-export const Catalog: FC<CatalogProps> = ({ selectedProducts, onProductSelect }) => {
+export const Catalog: FC<CatalogProps> = ({ cartItems, onProductSelect }) => {
   let [orderBy, setOrderBy] = useState<OrderByOption>(OrderKeyword.ASC);
 
   function handleFilterSelect(evt: React.ChangeEvent<HTMLSelectElement>) {
@@ -32,7 +33,7 @@ export const Catalog: FC<CatalogProps> = ({ selectedProducts, onProductSelect })
       .slice()
       .sort((a, b) => (orderBy === 'asc' ? a.price - b.price : b.price - a.price))
       .map((product) => {
-        let isSelected = selectedProducts.includes(product.id);
+        let isSelected = cartItems.some((item) => item.id === product.id);
 
         return (
           <li key={product.id} className='Products__list-item'>

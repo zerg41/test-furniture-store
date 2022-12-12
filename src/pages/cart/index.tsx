@@ -1,32 +1,31 @@
 import React, { FC, useMemo, useState } from 'react';
 import { mockProducts } from 'mock';
 import { Button, CartCard, OrderForm, ProductCard } from 'components';
+import { ICartItem } from 'app';
 
 type CartProps = {
-  selectedProducts: number[];
-  onProductSelect: (id: number) => void;
+  cartItems: ICartItem[];
+  onProductSelect: (id?: number, price?: number, amount?: number) => void;
 };
 
-export const Cart: FC<CartProps> = ({ selectedProducts, onProductSelect }) => {
-  let [totalProductValues, setTotalProductValues] = useState<number[]>([]);
-
+export const Cart: FC<CartProps> = ({ cartItems, onProductSelect }) => {
   let totalOrderValue = useMemo(() => {
-    if (totalProductValues.length) {
-      return totalProductValues.reduce((total, productValue) => total + productValue, 0);
+    if (cartItems.length) {
+      return cartItems.reduce((total, item) => total + item.price * item.amount, 0);
     }
 
     return 0;
-  }, [totalProductValues]);
+  }, [cartItems]);
 
   function renderSelectedProduct() {
     return mockProducts
-      .filter((product) => selectedProducts.includes(product.id))
+      .filter((product) => cartItems.some((item) => item.id === product.id))
       .map((product) => (
         <li key={product.id} className='Order-details__list-item'>
           <CartCard
             viewType='cart'
             isSelected={true}
-            onProductSelect={onProductSelect}
+            onProductSelect={() => onProductSelect(product.id, product.price)}
             product={product}
           />
         </li>
@@ -36,7 +35,7 @@ export const Cart: FC<CartProps> = ({ selectedProducts, onProductSelect }) => {
   return (
     <div className='Page-wrapper Cart'>
       <section className='Order-details'>
-        {selectedProducts.length ? (
+        {cartItems.length ? (
           <>
             <header className='Order-details__header'>
               <div>Товар</div>

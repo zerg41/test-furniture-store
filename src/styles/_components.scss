@@ -122,7 +122,7 @@
     margin-bottom: 14px;
     font-size: 16px;
     line-height: 20px;
-    padding-right: 38px;
+    padding-right: 28px;
     padding-left: 4px;
     color: #000000;
   }
@@ -212,7 +212,7 @@
     height: 172px;
     object-fit: cover;
 
-    @media screen and (max-width: $SMALL_DEVICE_WIDTH) {
+    @media screen and (max-width: 500px) {
       display: none;
     }
   }
@@ -257,7 +257,6 @@
         font-size: 14px;
         line-height: 210%;
         text-decoration-line: underline;
-
         color: black;
         cursor: pointer;
 
@@ -430,4 +429,46 @@
 .Button_size_lg {
   max-width: 290px;
   max-height: 42px;
+}
+
+.Counter {
+  display: flex;
+  align-items: center;
+  width: 70px;
+  height: 50px;
+  background: #f7f6f6;
+  border-radius: 6px;
+
+  .Counter__display {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: 48px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 210%;
+  }
+
+  .Counter__button-group {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      width: 16px;
+      height: 16px;
+      background: none;
+      border: none;
+      color: #cacdd8;
+      cursor: pointer;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
 }
