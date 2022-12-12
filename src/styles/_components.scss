@@ -107,14 +107,15 @@
 .Cart {
   flex-wrap: wrap;
   column-gap: 32px;
+  row-gap: 64px;
 }
 
-.Cart-menu {
+.Order-details {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 
-  .Cart-menu__header {
+  .Order-details__header {
     display: flex;
     justify-content: space-between;
 
@@ -123,17 +124,6 @@
 
     margin-bottom: 14px;
   }
-}
-
-.Cart-form {
-  display: flex;
-  max-width: 379px;
-  padding-top: 42px;
-  width: 100%;
-  min-width: calc($MIN_WIDTH - 2 * $space-12);
-  height: 556px;
-  background: #f7f6f6;
-  border-radius: 20px;
 }
 
 .Product-card {
@@ -229,4 +219,114 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
+}
+
+.Order-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 380px;
+  width: 100%;
+  min-width: calc($MIN_WIDTH - 2 * $space-12);
+  height: 556px;
+  padding-top: 42px;
+  background: #f7f6f6;
+  border-radius: 20px;
+
+  .Order-form__title {
+    margin: 0;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .Order-form__fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    row-gap: 40px;
+    margin: 0;
+    padding-top: 34px;
+    padding-bottom: 64px;
+    padding-left: 28px;
+    padding-right: 60px;
+    border: none;
+
+    input {
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid #cacdd8;
+      font-family: 'Montserrat';
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+
+      &::placeholder {
+        color: black;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .Order-form__price {
+    margin-bottom: 18px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 29px;
+
+    .Order-form__price-value {
+      font-weight: 500;
+    }
+  }
+}
+
+.Button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #040404;
+  border-radius: 20px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-out;
+
+  &:hover {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.14);
+  }
+  &:active {
+    box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.14);
+  }
+}
+
+.Button_variance_outlined {
+  background: none;
+}
+
+.Button_variance_solid {
+  background: black;
+  color: white;
+}
+
+.Button_size_md {
+  max-height: 37px;
+  max-width: 200px;
+}
+
+.Button_size_lg {
+  width: 290px;
+  max-height: 42px;
 }

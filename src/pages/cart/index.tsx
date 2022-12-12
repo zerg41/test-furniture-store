@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { mockProducts } from 'mock';
-import { ProductCard } from 'components';
+import { OrderForm, ProductCard } from 'components';
 
 type CartProps = {
   selectedProducts: number[];
@@ -8,11 +8,21 @@ type CartProps = {
 };
 
 export const Cart: FC<CartProps> = ({ selectedProducts, onProductSelect }) => {
+  let [totalProductValues, setTotalProductValues] = useState<number[]>([]);
+
+  let totalOrderValue = useMemo(() => {
+    if (totalProductValues.length) {
+      return totalProductValues.reduce((total, productValue) => total + productValue, 0);
+    }
+
+    return 0;
+  }, [totalProductValues]);
+
   function renderSelectedProduct() {
     return mockProducts
       .filter((product) => selectedProducts.includes(product.id))
       .map((product) => (
-        <li>
+        <li key={product.id} className='Order-details__list-item'>
           <ProductCard isSelected={true} onProductSelect={onProductSelect} product={product} />
         </li>
       ));
@@ -20,18 +30,18 @@ export const Cart: FC<CartProps> = ({ selectedProducts, onProductSelect }) => {
 
   return (
     <div className='Page-wrapper Cart'>
-      <section className='Cart-menu'>
-        <header className='Cart-menu__header'>
+      <section className='Order-details'>
+        <header className='Order-details__header'>
           <div>Товар</div>
           <div>К-во</div>
         </header>
         {selectedProducts.length ? (
-          <ul className='Cart-menu__list'>{renderSelectedProduct()}</ul>
+          <ul className='Order-details__list'>{renderSelectedProduct()}</ul>
         ) : (
           <>Добавьте товары в корзину</>
         )}
       </section>
-      <form className='Cart-form'>DAsd</form>
+      <OrderForm orderPrice={totalOrderValue} />
     </div>
   );
 };
