@@ -1,18 +1,19 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
+// components
 import { Counter } from 'components';
+// data
 import { IMockProduct } from 'mock';
 
 type CartCardProps = {
   product: IMockProduct;
-  isSelected?: boolean;
-  onProductSelect: (id: number, price: number) => void;
-  viewType?: 'catalog' | 'cart';
+  onProductRemove: (id: number) => void;
+  onAmountChange: (id: number, amount: number) => void;
 };
 
-export const CartCard: FC<CartCardProps> = ({ viewType, product, isSelected, onProductSelect }) => {
-  function handleAddToCart(id: number, price: number) {
-    onProductSelect(id, price);
-  }
+export const CartCard: FC<CartCardProps> = ({ product, onProductRemove, onAmountChange }) => {
+  let handleAmountChange = (amount: number) => {
+    return onAmountChange(product.id, amount);
+  };
 
   return (
     <article className='Cart-card'>
@@ -23,16 +24,13 @@ export const CartCard: FC<CartCardProps> = ({ viewType, product, isSelected, onP
         <div className='Cart-card__price'>{`${product.price.toLocaleString()} руб.`}</div>
         <div className='Cart-card__extra'>
           <button className='Cart-card__extra-button'>Избранные</button>
-          <button
-            className='Cart-card__extra-button'
-            onClick={() => handleAddToCart(product.id, product.price)}
-          >
+          <button className='Cart-card__extra-button' onClick={() => onProductRemove(product.id)}>
             Удалить
           </button>
         </div>
       </div>
       <div className='Cart-card__counter-container'>
-        <Counter min={1} max={10} onChange={() => handleAddToCart(product.id, product.price)} />
+        <Counter min={1} max={10} onChange={handleAmountChange} />
       </div>
     </article>
   );

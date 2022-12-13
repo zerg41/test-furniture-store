@@ -4,12 +4,8 @@ import { Cart, Catalog } from 'pages';
 import { Navbar } from 'components';
 // styles
 import 'styles/main.scss';
-
-export interface ICartItem {
-  id: number;
-  price: number;
-  amount: number;
-}
+// utils
+import { ICartItem } from 'types';
 
 const App: FC = () => {
   let [location, setLocation] = useState<'catalog' | 'cart'>('catalog'); // TODO: replace with routes
@@ -24,50 +20,42 @@ const App: FC = () => {
     setLocation(page);
   }, []);
 
-  let handleCartChange = useCallback(
-    (productId?: number, productPrice?: number, productAmount?: number) => {
-      // Clean Cart
-      if (productId == null) {
-        setCart([]);
+  let addItem = useCallback((id: number, price: number) => {
+    setCart([...cartRef.current, { id: id, price: price, amount: 1 }]);
+  }, []);
 
-        return;
-      }
+  let removeItem = useCallback((id: number) => {
+    setCart(cartRef.current.filter((item) => item.id !== id));
+  }, []);
 
-      // Remove Cart Item
-      if (cartRef.current.some((item) => item.id === productId)) {
-        setCart([...cartRef.current.filter((item) => item.id !== productId)]);
+  let changeAmount = useCallback((id: number, amount: number) => {
+    setCart(
+      cartRef.current.map((item) => {
+        if (item.id === id) {
+          return { ...item, amount: amount };
+        }
+        return item;
+      })
+    );
+  }, []);
 
-        return;
-      }
-
-      // Add Item
-      if (productId != null && productPrice != null) {
-        setCart([...cartRef.current, { id: productId, price: productPrice, amount: 1 }]);
-
-        return;
-      }
-
-      if (productId != null && productAmount != null) {
-        setCart((cart) =>
-          cart.map((item) => {
-            if (item.id === productId) {
-              return { id: item.id, price: item.price, amount: productAmount };
-            }
-
-            return item;
-          })
-        );
-      }
-    },
-    []
-  );
+  let clearCart = useCallback(() => {
+    setCart([]);
+  }, []);
 
   function renderPage() {
     switch (location) {
       case 'catalog':
-        return <Catalog cartItems={cart} onProductSelect={handleCartChange} />;
+        return <Catalog selectedItems={cart} addProduct={addItem} removeProduct={removeItem} />;
       case 'cart':
-        return <Cart cartItems={cart} onProductSelect={handleCartChange} />;
+        return (
+          <Cart
+            selectedItems={cart}
+            onAmountChange={changeAmount}
+            onProductRemove={removeItem}
+            onCleanCart={clearCart}
+          />
+        );
       default:
         return <></>;
     }

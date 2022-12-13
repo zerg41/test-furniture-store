@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+// styles
 import { ReactComponent as CatalogIcon } from 'assets/icons/catalog-icon.svg';
 import { ReactComponent as CartIcon } from 'assets/icons/cart-icon.svg';
 
@@ -13,16 +14,16 @@ export const Navbar: FC<NavbarProps> = ({ onLinkClick }) => {
       <ul className='Navbar-nav'>
         <li className='Nav-item'>
           <a href='#' className='Nav-item__link' onClick={() => onLinkClick('catalog')}>
-            <span className='Nav-text'>Каталог</span>
-            <span className='Nav-icon'>
+            <span className='Nav-item__text'>Каталог</span>
+            <span className='Nav-item__icon'>
               <CatalogIcon />
             </span>
           </a>
         </li>
         <li className='Nav-item'>
           <a href='#' className='Nav-item__link' onClick={() => onLinkClick('cart')}>
-            <span className='Nav-text'>Корзина</span>
-            <span className='Nav-icon'>
+            <span className='Nav-item__text'>Корзина</span>
+            <span className='Nav-item__icon'>
               <CartIcon />
             </span>
           </a>

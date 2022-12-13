@@ -1,14 +1,10 @@
 import React, { FC, useState } from 'react';
-import { mockProducts } from 'mock';
+// components
 import { ProductCard } from 'components';
-import { ICartItem } from 'app';
-
-// interface IOrderKeyword {
-//   ASC: 'asc',
-//   DESC: 'desc'
-// }
-
-type OrderByOption = typeof OrderKeyword[keyof typeof OrderKeyword];
+// data
+import { mockProducts } from 'mock';
+// utils
+import { ICartItem } from 'types';
 
 const OrderKeyword = {
   NONE: 'none',
@@ -16,12 +12,15 @@ const OrderKeyword = {
   DESC: 'desc',
 } as const;
 
+type OrderByOption = typeof OrderKeyword[keyof typeof OrderKeyword];
+
 type CatalogProps = {
-  cartItems: ICartItem[];
-  onProductSelect: (id: number) => void;
+  selectedItems: ICartItem[];
+  addProduct: (id: number, price: number) => void;
+  removeProduct: (id: number) => void;
 };
 
-export const Catalog: FC<CatalogProps> = ({ cartItems, onProductSelect }) => {
+export const Catalog: FC<CatalogProps> = ({ selectedItems, addProduct, removeProduct }) => {
   let [orderBy, setOrderBy] = useState<OrderByOption>(OrderKeyword.ASC);
 
   function handleFilterSelect(evt: React.ChangeEvent<HTMLSelectElement>) {
@@ -33,14 +32,18 @@ export const Catalog: FC<CatalogProps> = ({ cartItems, onProductSelect }) => {
       .slice()
       .sort((a, b) => (orderBy === 'asc' ? a.price - b.price : b.price - a.price))
       .map((product) => {
-        let isSelected = cartItems.some((item) => item.id === product.id);
+        let isProductInCart = selectedItems.some((item) => item.id === product.id);
+
+        let handleSelect = isProductInCart
+          ? () => removeProduct(product.id)
+          : () => addProduct(product.id, product.price);
 
         return (
           <li key={product.id} className='Products__list-item'>
             <ProductCard
               product={product}
-              isSelected={isSelected}
-              onProductSelect={onProductSelect}
+              isSelected={isProductInCart}
+              onProductSelect={handleSelect}
             />
           </li>
         );

@@ -1,14 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
+// styles
 import { ReactComponent as CaretUpIcon } from 'assets/icons/caret-up-icon.svg';
 
 type CounterProps = {
   min: number;
   max: number;
-  onChange: () => void;
+  onChange: (amount: number) => void;
 };
 
 export const Counter: FC<CounterProps> = ({ min, max, onChange }) => {
   let [current, setCurrent] = useState(min);
+
+  useEffect(() => {
+    onChange(current);
+  }, [current]);
 
   function handleIncrementButtonClick() {
     if (current < max) {

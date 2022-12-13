@@ -1,31 +1,34 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC } from 'react';
+// components
+import { Button, CartCard, OrderForm } from 'components';
+// data
 import { mockProducts } from 'mock';
-import { Button, CartCard, OrderForm, ProductCard } from 'components';
-import { ICartItem } from 'app';
+// utils
+import { ICartItem } from 'types';
 
 type CartProps = {
-  cartItems: ICartItem[];
-  onProductSelect: (id?: number, price?: number, amount?: number) => void;
+  selectedItems: ICartItem[];
+  onProductRemove: (id: number) => void;
+  onAmountChange: (id: number, amount: number) => void;
+  onCleanCart: () => void;
 };
 
-export const Cart: FC<CartProps> = ({ cartItems, onProductSelect }) => {
-  let totalOrderValue = useMemo(() => {
-    if (cartItems.length) {
-      return cartItems.reduce((total, item) => total + item.price * item.amount, 0);
-    }
-
-    return 0;
-  }, [cartItems]);
+export const Cart: FC<CartProps> = ({
+  selectedItems,
+  onProductRemove,
+  onAmountChange,
+  onCleanCart,
+}) => {
+  let totalOrderValue = selectedItems.reduce((total, item) => total + item.price * item.amount, 0);
 
   function renderSelectedProduct() {
     return mockProducts
-      .filter((product) => cartItems.some((item) => item.id === product.id))
+      .filter((product) => selectedItems.some((item) => item.id === product.id))
       .map((product) => (
         <li key={product.id} className='Order-details__list-item'>
           <CartCard
-            viewType='cart'
-            isSelected={true}
-            onProductSelect={() => onProductSelect(product.id, product.price)}
+            onProductRemove={onProductRemove}
+            onAmountChange={onAmountChange}
             product={product}
           />
         </li>
@@ -35,7 +38,7 @@ export const Cart: FC<CartProps> = ({ cartItems, onProductSelect }) => {
   return (
     <div className='Page-wrapper Cart'>
       <section className='Order-details'>
-        {cartItems.length ? (
+        {selectedItems.length ? (
           <>
             <header className='Order-details__header'>
               <div>Товар</div>
@@ -43,7 +46,7 @@ export const Cart: FC<CartProps> = ({ cartItems, onProductSelect }) => {
             </header>
             <ul className='Order-details__list'>{renderSelectedProduct()}</ul>
             <div className='Order-details__button-group'>
-              <Button size='md' variance='outlined'>
+              <Button size='md' variance='outlined' onClick={onCleanCart}>
                 Очистить корзину
               </Button>
               <Button size='md' variance='solid'>
