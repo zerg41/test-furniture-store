@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/test-furniture-store/static/css/main.04709f17.css",
+    "main.js": "/test-furniture-store/static/js/main.2d8aa872.js",
+    "static/media/lunar.png": "/test-furniture-store/static/media/lunar.60e50c9e78b93013b6d5.png",
+    "static/media/menu.png": "/test-furniture-store/static/media/menu.1fd4331e184ba4d6269a.png",
+    "static/media/nastan.png": "/test-furniture-store/static/media/nastan.957e4b642f0edf9de48a.png",
+    "static/media/asketa.png": "/test-furniture-store/static/media/asketa.b152ec55afc7644f1fba.png",
+    "static/media/vilora.png": "/test-furniture-store/static/media/vilora.70e93eb904daab1d6d5b.png",
+    "static/media/tatran.png": "/test-furniture-store/static/media/tatran.ab0b969a2d0febe73721.png",
+    "static/media/cart-icon.svg": "/test-furniture-store/static/media/cart-icon.96bd8691f489d8a66d99c5eb910dac87.svg",
+    "static/media/add-to-fav-icon.svg": "/test-furniture-store/static/media/add-to-fav-icon.445223ed04172ffc59a4dfd303fc2208.svg",
+    "index.html": "/test-furniture-store/index.html",
+    "static/media/add-to-cart-icon.svg": "/test-furniture-store/static/media/add-to-cart-icon.4d7792f015580e4307a2da2c3cab6bab.svg",
+    "static/media/catalog-icon.svg": "/test-furniture-store/static/media/catalog-icon.639159ba1a3da7b4c05b9968fd8d56f0.svg",
+    "static/media/caret-up-icon.svg": "/test-furniture-store/static/media/caret-up-icon.48fa6c69ad024db6abbe37def3f2869b.svg",
+    "static/media/arrow-down-icon.svg": "/test-furniture-store/static/media/arrow-down-icon.b65ee8aa87323948aaf7.svg",
+    "main.04709f17.css.map": "/test-furniture-store/static/css/main.04709f17.css.map",
+    "main.2d8aa872.js.map": "/test-furniture-store/static/js/main.2d8aa872.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04709f17.css",
+    "static/js/main.2d8aa872.js"
+  ]
+}
